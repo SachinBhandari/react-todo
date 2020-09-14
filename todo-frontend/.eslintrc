@@ -1,0 +1,13 @@
+{
+  "env": {
+    "browser": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "import/no-extraneous-dependencies": "off",
+    "react/forbid-prop-types": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "no-underscore-dangle": "off"
+  }
+}
+

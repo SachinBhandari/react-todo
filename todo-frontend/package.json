@@ -1,0 +1,43 @@
+{
+  "name": "@anywhere-todo/frontend",
+  "version": "1.0.0",
+  "description": "Todo App UI",
+  "main": "index.html",
+  "private": false,
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "dev": "yarn dev"
+  },
+  "author": "Sachin Singh Bhandari",
+  "dependencies": {
+    "@apollo/react-hooks": "^3.1.3",
+    "@material-ui/core": "^4.9.0",
+    "@material-ui/icons": "^4.5.1",
+    "@material-ui/lab": "^4.0.0-alpha.40",
+    "apollo-boost": "^0.4.7",
+    "components": "^0.1.0",
+    "graphql": "^14.6.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.0",
+    "react-apollo": "^3.1.3",
+    "react-dom": "^16.5.0",
+    "react-helmet": "^5.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "^23.6.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-graphql": "2.1.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "parcel": "^1.9.7",
+    "sass": "^1.26.5"
+  }
+}

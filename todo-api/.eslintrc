@@ -1,0 +1,17 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "rules": {
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "import/no-extraneous-dependencies": "off",
+    "func-names": ["error", "never"],
+    "comma-dangle": "off",
+    "react/prefer-stateless-function": "off",
+    "import/no-dynamic-require": "off",
+    "no-underscore-dangle": "off",
+    "global-require": "off",
+    "no-param-reassign": "off",
+    "camelcase": "off"
+  }
+}

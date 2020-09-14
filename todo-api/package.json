@@ -1,0 +1,26 @@
+{
+  "name": "@anywhere-todo/api",
+  "version": "1.0.0",
+  "description": "A todo app for super beings",
+  "author": "Sachin Singh Bhandari",
+  "main": "app.js",
+  "private": false,
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "alias": {
+    "ui": "./ui/components"
+  },
+  "dependencies": {
+    "apollo-server-hapi": "^2.8.1",
+    "config": "^2.0.1",
+    "hapi": "^17.5.0",
+    "lodash.merge": "^4.6.1",
+    "mongoose": "^5.2.14"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}

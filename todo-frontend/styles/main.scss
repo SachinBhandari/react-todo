@@ -1,0 +1,18 @@
+body {
+  background: rgba(197, 197, 197, 0.37);
+}
+
+.card-override {
+  min-width: 580px;
+  overflow: auto;
+}
+
+.disable-todo-items {
+  color: grey;
+  text-decoration: line-through;
+}
+
+.delete-btn {
+  color: #9e9e9e;
+  cursor: pointer;
+}
