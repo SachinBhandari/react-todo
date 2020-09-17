@@ -1,9 +1,9 @@
 const Boom = require('boom');
 
-const Todo = require('../models/Todo');
+const Todo = require('../database/models/Todo');
 
-class TodoImpl {
-  static async getTodo(_id) {
+class Todo {
+  static async get(_id) {
     try {
       const todo = await Todo.findOne({ _id });
       return todo;
@@ -12,7 +12,7 @@ class TodoImpl {
     }
   }
 
-  static async getTodos(status) {
+  static async getAll(status) {
     try {
       const tasks = await Todo.find({ status }).sort({ createdAt: -1 });
       return tasks;
@@ -21,7 +21,7 @@ class TodoImpl {
     }
   }
 
-  static async createTodo(task) {
+  static async create(task) {
     try {
       const todo = new Todo({ task });
       return await todo.save();
@@ -30,7 +30,7 @@ class TodoImpl {
     }
   }
 
-  static async updateTodo(_id, status) {
+  static async update(_id, status) {
     try {
       const updatedTodo = await Todo.findOneAndUpdate(
         {
@@ -51,7 +51,7 @@ class TodoImpl {
     }
   }
 
-  static editTodo(_id, task) {
+  static edit(_id, task) {
     return Todo.updateOne({
       _id
     }, {
@@ -61,7 +61,7 @@ class TodoImpl {
     });
   }
 
-  static async deleteTodo(_id) {
+  static async delete(_id) {
     try {
       const deletedTodos = await Todo.findOneAndRemove({
         _id
@@ -84,4 +84,4 @@ class TodoImpl {
   }
 }
 
-module.exports = TodoImpl;
+module.exports = Todo;

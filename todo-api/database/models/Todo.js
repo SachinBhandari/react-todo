@@ -1,11 +1,23 @@
 const mongoose = require('mongoose');
 
+const todo = {
+  task: String,
+  status: {
+    type: String,
+    enum: ['completed', 'pending'],
+    default: 'pending',
+  },
+  timestamp: {
+    type: Date,
+    default: new Date(),
+  },
+};
+
 const schema = new mongoose.Schema(
   {
-    task: String,
-    status: { type: String, enum: ['completed', 'pending'], default: 'pending' }
+    ...todo,
+    children: [todo]
   },
-  { timestamps: true }
 );
 
 const Todo = mongoose.model('todo', schema);

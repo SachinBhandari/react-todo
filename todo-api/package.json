@@ -12,9 +12,8 @@
     "ui": "./ui/components"
   },
   "dependencies": {
-    "apollo-server-hapi": "^2.8.1",
     "config": "^2.0.1",
-    "hapi": "^17.5.0",
+    "express": "^4.17.1",
     "lodash.merge": "^4.6.1",
     "mongoose": "^5.2.14"
   },
