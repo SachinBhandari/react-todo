@@ -1,8 +1,6 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
 import { string } from 'prop-types';
 
-import GET_TODOS from '../graphql/query/getTodos';
 import TodoListPlaceHolder from '../components/TodoListPlaceHolder';
 import TodoListComponent from '../components/TodoListComponent/TodoListComponent';
 
