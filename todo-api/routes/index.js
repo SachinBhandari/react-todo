@@ -1,9 +1,18 @@
-const { Router } = require('express');
 const fs = require('fs');
-const pathModule = require('path');
+const { Router } = require('express');
+const { validationResult } = require('express-validator');
 
+const pathModule = require('path');
 const indexRouter = Router();
 const apiRouter = Router();
+
+const performValidation = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  next();
+};
 
 const makeRouter = (routes) => {
   if (!routes || routes.constructor !== Array) {
@@ -21,6 +30,7 @@ const makeRouter = (routes) => {
 
     if (validators) {
       resolvedMiddleware.push(validators);
+      resolvedMiddleware.push(performValidation);
     }
 
     resolvedMiddleware.push(middleware);

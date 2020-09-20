@@ -34,9 +34,9 @@ const todoRoutes = [
     middleware: [todoController.update],
   }, {
     method: 'post',
-    path: '/:id',
+    path: '/',
     validators: [
-      body('text').notEmpty(),
+      body('task').notEmpty(),
     ],
     middleware: [todoController.create],
   },

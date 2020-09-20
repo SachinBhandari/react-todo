@@ -1,6 +1,9 @@
-const useHackerNewsApi = (config) => {
+import { useState, useEffect } from 'react';
+import request from '../apis/requestEngine';
+
+const useQuery = (initialConfig) => {
   const [data, setData] = useState({ hits: [] });
-  const [url, setUrl] = useState(config);
+  const [config, setConfig] = useState(initialConfig);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -10,8 +13,7 @@ const useHackerNewsApi = (config) => {
       setIsLoading(true);
 
       try {
-        const result = await axios(config);
-
+        const result = await request(config);
         setData(result.data);
       } catch (error) {
         setIsError(true);
@@ -21,7 +23,9 @@ const useHackerNewsApi = (config) => {
     };
 
     fetchData();
-  }, [url]);
+  }, [config]);
 
-  return [{ data, isLoading, isError }, setUrl];
-}
+  return [{ data, isLoading, isError }, setConfig];
+};
+
+export default useQuery;

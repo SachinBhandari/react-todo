@@ -4,7 +4,7 @@ const getURL = (key, params=[])=> {
 
   try{
     const apiBank = {
-      CHARGE_BREAKUP: `/todo/${params[0]||''}`,
+      TODO: `/todo/${params[0]||''}`,
     };
 
     if(key && typeof apiBank[key] != 'undefined'){

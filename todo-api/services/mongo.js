@@ -1,18 +1,21 @@
-const Mongoose = require('mongoose');
+const mongoose = require('mongoose');
+mongoose.Promise = Promise;
 
-const MongoDB = {
-  name: 'HapiMongo',
-  version: '1.1.0',
-  register: async (server, options) => {
-    const hosts = options.hosts.join(',');
-    const connectionString = `mongodb://${hosts}/${options.db}`;
-
-    Mongoose.connect(connectionString, options.connectOpts);
-
-    const connection = Mongoose.connection;
-
-    connection.on('error', e => server.log(e));
-  }
+let options = {
+  autoIndex: false,
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 };
 
-module.exports = MongoDB;
+mongoose.connect(process.env.MONGODB, options);
+
+mongoose.connection.on('error', function () {
+  console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
+  process.exit(1);
+});
+
+mongoose.connection.once('open', () => {
+  console.log("mongodb running");
+});
+

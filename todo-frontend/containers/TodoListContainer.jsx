@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { string } from 'prop-types';
 
+import useQuery from '../lib/useQuery';
 import TodoListPlaceHolder from '../components/TodoListPlaceHolder';
 import TodoListComponent from '../components/TodoListComponent/TodoListComponent';
 
 const TodoListContainer = ({ status, visibility }) => {
-  const { loading, error, data } = useQuery(GET_TODOS, { variables: { status } });
+  const [todos, setTodos] = useState([]);
+  const { loading, error, data } = useQuery({
+    method: 'post',
+    url: 'TODO',
+    auth: true,
+  });
+
+  useEffect(() => {
+    setTodos(data)
+  }, data);
 
   if (error) return <div>Error</div>;
   if (loading) return <TodoListPlaceHolder lines={4} />;
 
-  const { getTodos: todos } = data;
   return (
     <TodoListComponent
       disableText={status === 'completed'}

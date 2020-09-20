@@ -1,32 +1,50 @@
-const Boom = require('boom');
+const Todo = require('../models/Todo');
 
-const Todo = require('../database/models/Todo');
+class TodoController {
+  static async get(req, res) {
+    const { _id } = req.query;
 
-class Todo {
-  static async get(_id) {
     try {
       const todo = await Todo.findOne({ _id });
-      return todo;
+      return res.status(200).json({
+        data: todo,
+      });
     } catch (err) {
-      return Boom.badImplementation('Something went wrong while fetching task.', err);
+      return res.status(500).json({
+        error: err.message,
+        message: 'Something went wrong.'
+      });
     }
   }
 
-  static async getAll(status) {
+  static async getAll(req, res) {
     try {
-      const tasks = await Todo.find({ status }).sort({ createdAt: -1 });
-      return tasks;
+      const tasks = await Todo.find().sort({ createdAt: -1 });
+      return res.status(200).json({
+        data: tasks,
+      });
     } catch (err) {
-      return Boom.badImplementation('Something went wrong while finding tasks', err);
+      return res.status(500).json({
+        error: err.message,
+        message: "Something went wrong."
+      });
     }
   }
 
-  static async create(task) {
+  static async create(req, res) {
+    const { task } = req.body;
     try {
       const todo = new Todo({ task });
-      return await todo.save();
+      await todo.save();
+      console.log('todo: ', todo);
+      return res.status(200).json({
+        data: todo,
+      });
     } catch (err) {
-      return Boom.badImplementation('Something went wrong while creating task.', err);
+      return res.status(500).json({
+        error: err.message,
+        message: "Something went wrong."
+      });
     }
   }
 
@@ -47,7 +65,7 @@ class Todo {
       );
       return updatedTodo;
     } catch (err) {
-      return Boom.badImplementation('Something went wrong while updating todo.', err);
+      return err;
     }
   }
 
@@ -68,7 +86,7 @@ class Todo {
       });
       return deletedTodos;
     } catch (err) {
-      return Boom.badImplementation('Something went wrong while deleting todo.', err);
+      return err;
     }
   }
 
@@ -79,9 +97,9 @@ class Todo {
       });
       return isDeleted.deletedCount.toString();
     } catch (err) {
-      return Boom.badImplementation('Something went wrong while deleting then completed todos.', err);
+      return err;
     }
   }
 }
 
-module.exports = Todo;
+module.exports = TodoController;
