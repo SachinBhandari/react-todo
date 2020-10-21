@@ -1,7 +1,8 @@
-const express = require('express');
+const cors = require('cors');
 const logger = require('morgan');
-const cookieParser = require('cookie-parser');
+const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 const routes = require('./routes');
 
@@ -9,6 +10,7 @@ require('./services/mongo');
 
 const app = express();
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json({ limit: '300kb' }));
 

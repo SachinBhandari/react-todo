@@ -1,30 +1,19 @@
 import React from 'react';
-import { useMutation } from '@apollo/react-hooks';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { oneOf, func } from 'prop-types';
 
-import DELETE_COMPLETED_TODO from '../../graphql/mutation/deleteCompletedTodo';
-import GET_TODOS from '../../graphql/query/getTodos';
-
 const TodoControlCenter = ({ visibility, setVisibility }) => {
-  const [deleteCompletedTodo] = useMutation(DELETE_COMPLETED_TODO, {
-    update: (cache, { data: { deleteCompletedTodo: deleteCount } }) => {
-      if (parseInt(deleteCount, 10)) {
-        cache.writeQuery({
-          query: GET_TODOS,
-          variables: { status: 'completed' },
-          data: { getTodos: [] }
-        });
-      }
-    }
-  });
 
   const onChangeVisibility = (e, newVisibility) => {
     if (!visibility) return;
     setVisibility(newVisibility);
+  };
+
+  const deleteCompletedTodo = () => {
+
   };
 
   return (

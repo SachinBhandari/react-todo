@@ -1,8 +1,8 @@
-import axios  from 'axios';
-import getURL from "./apis";
+import axios from 'axios';
+import getURL from "../apis/apis";
 const CancelToken = axios.CancelToken;
 
-export const request = (requestConfig, cb)=>{
+export const request = (requestConfig, cb) => {
   let config = {...requestConfig, timeout: 1200000};
 
   const authToken = config.auth ?localStorage.getItem('chit'): null;
@@ -18,13 +18,13 @@ export const request = (requestConfig, cb)=>{
     delete config['auth'];
   }
 
-  if(config.inUrlParams){
+  if (config.inUrlParams) {
     config.url = getURL(config.url, config.inUrlParams);
     delete config['inUrlParams'];
-  }else{
+  } else {
     config.url = getURL(config.url);
   }
-
+  console.log(config.url);
   if(typeof cb === "function"){
     config.cancelToken = new CancelToken(cb)
   }

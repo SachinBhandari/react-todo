@@ -1,31 +1,34 @@
 import { useState, useEffect } from 'react';
-import request from '../apis/requestEngine';
+import request from './requestEngine';
 
-const useQuery = (initialConfig) => {
-  const [data, setData] = useState({ hits: [] });
-  const [config, setConfig] = useState(initialConfig);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+const useQuery = (config) => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
-  useEffect(() => {
+  useEffect( () => {
+    console.log('mount');
     const fetchData = async () => {
-      setIsError(false);
-      setIsLoading(true);
+      setError(false);
+      setLoading(true);
 
       try {
         const result = await request(config);
         setData(result.data);
       } catch (error) {
-        setIsError(true);
+        setError(true);
       }
 
-      setIsLoading(false);
+      setLoading(false);
     };
 
     fetchData();
-  }, [config]);
+    return () => {
+      console.log('unmount');
+    }
+  }, []);
 
-  return [{ data, isLoading, isError }, setConfig];
+  return { data, loading, error };
 };
 
 export default useQuery;

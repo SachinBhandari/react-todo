@@ -1,21 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { string } from 'prop-types';
 
 import useQuery from '../lib/useQuery';
 import TodoListPlaceHolder from '../components/TodoListPlaceHolder';
 import TodoListComponent from '../components/TodoListComponent/TodoListComponent';
+import TodoContext from "../context/TodoContext";
 
 const TodoListContainer = ({ status, visibility }) => {
-  const [todos, setTodos] = useState([]);
+  const [state, dispatch] = useContext(TodoContext);
+  const { todos } = state;
   const { loading, error, data } = useQuery({
-    method: 'post',
+    method: 'get',
     url: 'TODO',
     auth: true,
   });
-
-  useEffect(() => {
-    setTodos(data)
-  }, data);
 
   if (error) return <div>Error</div>;
   if (loading) return <TodoListPlaceHolder lines={4} />;
